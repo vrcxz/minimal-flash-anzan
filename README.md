@@ -3,4 +3,6 @@ A minimal, static webpage for practicing your mental math (specifically made for
 
 `Note: The page is unresponsive and is intended only for mobile view.`
 
+---
+
 You can view the page [here](https://vonnogadas.github.io/minimal-flash-anzan/).
