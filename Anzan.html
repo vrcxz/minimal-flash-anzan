@@ -1,0 +1,120 @@
+<style>
+  body {
+    background-color: 222222;
+    color: white;
+}
+
+p.score {
+font-size: 20px;
+  display: inline;}
+</style>
+<body>
+
+<p id="txt" style="font-size:80px">0</p>
+<p id="txtLength">0</p>
+<button onclick="randomize()">Randomize</button>
+<button onclick="printNumbers()">Start</button>
+<button onclick="stop()">Stop</button>
+<p ></p>
+<input type="number" id="length" value="5"> Input Length</input>
+<p></p>
+<input type="number" id="speed" value="2"> Input Speed</input>
+<p style="color:222222">.</p>
+<input id="answer" type="number"> Input Answer</input>
+<p ></p>
+<button id="checkAnswer" onclick="checkSum()">Confirm</button>
+<p id="answerText">Waiting</p>
+<p id="score" class="score" style="color:hsl(360,80%,70%);" style="font-size="13px"">Score: 0</p>
+<p id="scoreRank" class="score" style="color:hsl(360,100%,60%);"> - (The Bug)</p>
+
+<script src="ranklist.js"></script>
+<script>
+  
+  let n = []
+  let i=0;
+  let sum=0;
+  let stopText = false
+  let speed = 1000 //Default speed, adjustable 
+  let length = 5
+  let score = 0
+  let scoreColor = 360 //Red
+  let rankNum = 0
+  let flag = false
+  
+  document.getElementById("scoreRank").innerHTML = " - ("+ranks[rankNum]+")";
+  
+  
+  function randomize(){
+    //Clear Values
+    n=[]
+    sum=0
+    stopText=true
+speed = document.getElementById("speed").value * 1000
+length = document.getElementById("length").value
+
+    for(let i=0;i<length;i++){
+      if(i%2==0){
+        n[i] = 9
+      }
+      else {
+           n[i] = Math.floor( (10 * Math.random()))+1;
+      }
+ sum+=n[i]
+    }
+     console.log(n)
+     console.log(sum)
+  }
+  randomize()
+  
+  function stop(){stopText=true}
+  
+  
+  
+  function printNumbers(){
+stopText=false
+speed = document.getElementById("speed").value * 1000
+length = document.getElementById("length").value
+      
+      
+      if(stopText==false&&flag==false){
+      flag=true
+    let printInterval = window.setInterval(function(){
+document.getElementById("txt").innerHTML = n[i]
+document.getElementById("txtLength").innerHTML = i+1;
+i++
+
+if(i>=n.length+1||stopText==true){
+  clearInterval(printInterval)
+  i=0
+  stopText=false 
+  document.getElementById("txt").innerHTML = 0;
+document.getElementById("txtLength").innerHTML = 0;
+   flag=false
+}
+console.log(stopText)
+ }, speed);
+      }
+   
+  }
+
+function checkSum(){
+  let ans = document.getElementById("answer").value;
+  if(ans==sum){
+    console.log("Correct")
+    document.getElementById("answerText").innerHTML = "Correct";
+    score++
+   if(rankNum<ranks.length-1)rankNum+=0.1;
+    
+    scoreColor= scoreColor - 7
+    document.getElementById("score").innerHTML = "Score: " + score;
+    document.getElementById("score").style.color = "hsl("+scoreColor+",80%,70%)";
+    document.getElementById("scoreRank").innerHTML = " - ("+ranks[Math.floor(rankNum)]+")";
+    document.getElementById("scoreRank").style.color = "hsl("+scoreColor+",100%,60%)";
+    randomize()
+  }
+  else {console.log("Wrong")
+    document.getElementById("answerText").innerHTML=  "Wrong"}
+}
+  
+</script>
+</body>
