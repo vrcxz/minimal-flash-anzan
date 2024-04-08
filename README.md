@@ -5,4 +5,4 @@ A minimal, static webpage for practicing your mental math (specifically made for
 
 ---
 
-You can view the page [here](https://vonnogadas.github.io/minimal-flash-anzan/).
+You can view the page [here](https://vrcxz.github.io/minimal-flash-anzan/).
